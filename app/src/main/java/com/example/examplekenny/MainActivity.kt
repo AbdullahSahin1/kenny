@@ -34,14 +34,22 @@ class MainActivity : AppCompatActivity() {
         imageArray.add(binding.imageView7)
         imageArray.add(binding.imageView8)
         imageArray.add(binding.imageView9)
+        hideImages()
     }
-    fun hideImages(view: View) {
-        for (image in imageArray) {
-            image.visibility = View.INVISIBLE
-        }
-        val random = Random()
-        val randomIndex = random.nextInt(9)
-        imageArray[randomIndex].visibility = View.VISIBLE
+    fun hideImages() {
+       runnable = object : Runnable{
+           override fun run() {
+               for (image in imageArray) {
+                   image.visibility = View.INVISIBLE
+               }
+               val random = Random()
+               val randomIndex = random.nextInt(9)
+               imageArray[randomIndex].visibility = View.VISIBLE
+               handler.postDelayed(runnable,500)
+           }
+
+       }
+        handler.post(runnable)
     }
     fun increaseScore(view: View) {
         score = score + 1
