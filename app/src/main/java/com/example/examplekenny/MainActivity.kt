@@ -35,6 +35,16 @@ class MainActivity : AppCompatActivity() {
         imageArray.add(binding.imageView8)
         imageArray.add(binding.imageView9)
         hideImages()
+        object : CountDownTimer(150000,1000){
+            override fun onTick(millisUntilFinished: Long) {
+                binding.timeText.text = "Time: ${millisUntilFinished/1000}"
+            }
+
+            override fun onFinish() {
+
+            }
+
+        }.start()
     }
     fun hideImages() {
        runnable = object : Runnable{
